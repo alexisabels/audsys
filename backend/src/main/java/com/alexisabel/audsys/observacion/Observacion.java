@@ -3,6 +3,8 @@ package com.alexisabel.audsys.observacion;
 import com.alexisabel.audsys.auditoria.Auditoria;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table
@@ -11,9 +13,15 @@ public class Observacion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+        @NotBlank(message = "La descripción es obligatoria")
+
     private String descripcion;
+        @NotNull(message = "La criticidad es obligatoria")
+
     @Enumerated(EnumType.STRING)
     private Criticidad criticidad;
+        @NotNull(message = "El ID de auditoría es obligatorio")
+
     @ManyToOne
     @JoinColumn(name = "auditoria_id")
     @JsonBackReference

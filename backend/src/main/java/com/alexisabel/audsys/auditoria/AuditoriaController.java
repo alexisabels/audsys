@@ -1,7 +1,7 @@
 package com.alexisabel.audsys.auditoria;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,8 +11,8 @@ import java.util.Optional;
 @RestController
 @RequestMapping(path = "/api/v1/auditoria")
 public class AuditoriaController {
-    private final AuditoriaService auditoriaService;
 
+    private final AuditoriaService auditoriaService;
 
     @Autowired
     public AuditoriaController(AuditoriaService auditoriaService) {
@@ -25,23 +25,23 @@ public class AuditoriaController {
     }
 
     @GetMapping(path = "{auditoriaId}")
-    public Optional<Auditoria> getAuditoria(@PathVariable("auditoriaId") Long AuditoriaId) {
-        return auditoriaService.getAuditoria(AuditoriaId);
+    public Optional<Auditoria> getAuditoria(@PathVariable("auditoriaId") Long auditoriaId) {
+        return auditoriaService.getAuditoria(auditoriaId);
     }
 
     @PostMapping
-    public void addAuditoria(@Validated @RequestBody AuditoriaDTO auditoriaDTO) {
+    public void addAuditoria(@Valid @RequestBody AuditoriaDTO auditoriaDTO) {
         auditoriaService.addAuditoria(auditoriaDTO);
     }
 
-    @DeleteMapping(path = "{AuditoriaId}")
-    public void deleteAuditoria(@PathVariable Long AuditoriaId) {
-        auditoriaService.deleteAuditoria(AuditoriaId);
-    }
-    @PutMapping(path = "{AuditoriaId}")
-    public void updateAuditoria(@PathVariable("AuditoriaId") Long auditoriaId,
-                                @RequestBody AuditoriaDTO auditoriaDTO) {
-        auditoriaService.updateAuditoria(auditoriaId, auditoriaDTO);
+    @DeleteMapping(path = "{auditoriaId}")
+    public void deleteAuditoria(@PathVariable Long auditoriaId) {
+        auditoriaService.deleteAuditoria(auditoriaId);
     }
 
+    @PutMapping(path = "{auditoriaId}")
+    public void updateAuditoria(@PathVariable("auditoriaId") Long auditoriaId,
+                                @Valid @RequestBody AuditoriaDTO auditoriaDTO) {
+        auditoriaService.updateAuditoria(auditoriaId, auditoriaDTO);
+    }
 }

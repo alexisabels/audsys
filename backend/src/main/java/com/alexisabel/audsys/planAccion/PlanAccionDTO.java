@@ -1,9 +1,17 @@
 package com.alexisabel.audsys.planAccion;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 public class PlanAccionDTO {
     private Long id;
+        @NotBlank(message = "La descripción es obligatoria")
     private String descripcion;
+        @NotNull(message = "El estado es obligatorio")
+
     private EstadoPlan estado;
+        @NotNull(message = "El ID de auditoría es obligatorio")
+
     private Long auditoriaId;
 
     public PlanAccionDTO(Long id, String descripcion, EstadoPlan estado, Long auditoriaId) {

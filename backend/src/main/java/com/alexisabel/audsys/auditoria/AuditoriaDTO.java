@@ -3,6 +3,8 @@ package com.alexisabel.audsys.auditoria;
 
 import com.alexisabel.audsys.observacion.ObservacionDTO;
 import com.alexisabel.audsys.planAccion.PlanAccionDTO;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -22,14 +24,19 @@ public class AuditoriaDTO {
     public AuditoriaDTO() {
     }
 
+    @NotNull(message = "La fecha de auditoría es obligatoria")
     private LocalDate fecha;
 
+    @NotNull(message = "El tipo de auditoría es obligatorio")
     private TipoAuditoria tipo;
 
+    @NotEmpty(message = "Las categorías son obligatorias")
     private Set<CategoriaAuditoria> categorias;
 
+    @NotNull(message = "El auditor es obligatorio")
     private Long auditorId;
 
+    @NotNull(message = "El departamento es obligatorio")
     private Long departamentoId;
     private List<ObservacionDTO> observaciones;
 

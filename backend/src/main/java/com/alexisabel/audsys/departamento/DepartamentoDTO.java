@@ -1,7 +1,13 @@
 package com.alexisabel.audsys.departamento;
 
+import jakarta.validation.constraints.NotBlank;
+
 public class DepartamentoDTO {
+        @NotBlank(message = "El nombre es obligatorio")
+
     private String nombre;
+        @NotBlank(message = "El responsable es obligatorio")
+
     private String responsable;
 
     public DepartamentoDTO() {}

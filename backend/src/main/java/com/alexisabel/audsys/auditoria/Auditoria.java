@@ -7,6 +7,8 @@ import com.alexisabel.audsys.observacion.Observacion;
 import com.alexisabel.audsys.planAccion.PlanAccion;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -18,19 +20,25 @@ public class Auditoria {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    @NotNull(message = "La fecha de auditoría es obligatoria")
     private LocalDate fecha;
 
+    @NotNull(message = "El tipo de auditoría es obligatorio")
     @Enumerated(EnumType.STRING)
     private TipoAuditoria tipo;
 
+    @NotEmpty(message = "Las categorías son obligatorias")
     @ElementCollection(targetClass = CategoriaAuditoria.class)
     @Enumerated(EnumType.STRING)
     private Set<CategoriaAuditoria> categorias;
 
+    @NotNull(message = "El departamento es obligatorio")
     @ManyToOne
     @JoinColumn(name = "departamento_id")
     private Departamento departamento;
 
+    @NotNull(message = "El auditor es obligatorio")
     @ManyToOne
     @JoinColumn(name = "auditor_id")
     private Auditor auditor;

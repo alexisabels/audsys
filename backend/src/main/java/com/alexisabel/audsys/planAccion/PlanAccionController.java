@@ -1,7 +1,7 @@
 package com.alexisabel.audsys.planAccion;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.annotation.Validated;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -30,7 +30,7 @@ public class PlanAccionController {
     }
 
     @PostMapping
-    public void addPlanAccion(@Validated @RequestBody PlanAccionDTO planAccionDTO) {
+    public void addPlanAccion(@Valid @RequestBody PlanAccionDTO planAccionDTO) {
         planAccionService.addPlanAccion(planAccionDTO);
     }
 
@@ -41,7 +41,7 @@ public class PlanAccionController {
 
     @PutMapping(path = "{planId}")
     public void updatePlanAccion(@PathVariable("planId") Long planId,
-                                  @RequestBody PlanAccionDTO planAccionDTO) {
+                                 @Valid @RequestBody PlanAccionDTO planAccionDTO) {
         planAccionService.updatePlanAccion(planId, planAccionDTO);
     }
 }

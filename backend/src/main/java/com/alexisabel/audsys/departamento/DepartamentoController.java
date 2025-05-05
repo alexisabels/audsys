@@ -2,7 +2,7 @@ package com.alexisabel.audsys.departamento;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
+import jakarta.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,7 +29,7 @@ public class DepartamentoController {
     }
 
     @PostMapping
-    public void addDepartamento(@RequestBody DepartamentoDTO dto) {
+    public void addDepartamento(@Valid @RequestBody DepartamentoDTO dto) {
         departamentoService.addDepartamento(dto);
     }
 
@@ -39,7 +39,7 @@ public class DepartamentoController {
     }
     @PutMapping(path = "{departamentoId}")
     public void updateDepartamento(@PathVariable Long departamentoId,
-                                   @RequestBody DepartamentoDTO dto) {
+                                   @Valid @RequestBody DepartamentoDTO dto) {
         departamentoService.updateDepartamento(departamentoId, dto);
     }
 
