@@ -27,7 +27,7 @@ AudSys es una aplicación pensada para ayudar a pequeñas empresas a tener contr
 - `Auditoría`: entidad principal con relación a observaciones y planes.
 - `Observación`: comentarios o hallazgos encontrados durante una auditoría.
 - `Plan de acción`: medidas a tomar frente a observaciones registradas en una auditoría, aplicables a un departamento.
-
+![Estructura database](./docs/db_diagram.png)
 ## Endpoints principales
 
 - `GET /api/v1/auditoria`
@@ -42,7 +42,7 @@ AudSys es una aplicación pensada para ayudar a pequeñas empresas a tener contr
 
 ### Obtener auditorías registradas
 
-`GET /api/v1/auditoria`
+## `GET /api/v1/auditoria`
 
 ```json
 [
