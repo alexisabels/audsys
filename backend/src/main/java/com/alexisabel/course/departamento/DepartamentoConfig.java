@@ -8,6 +8,7 @@ import java.util.List;
 
 @Configuration
 public class DepartamentoConfig {
+   /*
     @Bean
     CommandLineRunner commandLineRunner(DepartamentoRepository departamentoRepository) {
         return args -> {
@@ -20,4 +21,5 @@ public class DepartamentoConfig {
             departamentoRepository.saveAll(List.of(IT, Finanzas));
         };
     }
+    */
 }

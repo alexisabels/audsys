@@ -1,9 +1,12 @@
 package com.alexisabel.course.departamento;
 
+import com.alexisabel.course.auditoria.Auditoria;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.List;
 
 @Entity
 @Table
@@ -13,6 +16,9 @@ public class Departamento {
     private Long id;
     private String nombre;
     private String responsable;
+    @OneToMany(mappedBy = "departamento")
+    @JsonIgnore
+    private List<Auditoria> auditorias;
 
     public Departamento(Long id, String nombre, String responsable) {
         this.id = id;
