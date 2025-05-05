@@ -29,17 +29,18 @@ public class DepartamentoController {
     }
 
     @PostMapping
-    public void addDepartamento(@RequestBody Departamento departamento) {
-        departamentoService.addDepartamento(departamento);
+    public void addDepartamento(@RequestBody DepartamentoDTO dto) {
+        departamentoService.addDepartamento(dto);
     }
+
     @DeleteMapping(path = "{departamentoId}")
     public void deleteDepartamento(@PathVariable Long departamentoId) {
         departamentoService.deleteDepartamento(departamentoId);
     }
     @PutMapping(path = "{departamentoId}")
-    public void updateDepartamento(@PathVariable("departamentoId") Long departamentoId,
-                                   @RequestParam(required = false) String nombre,
-                                   @RequestParam(required = false) String responsable) {
-        departamentoService.updateDepartamento(departamentoId, nombre, responsable);
+    public void updateDepartamento(@PathVariable Long departamentoId,
+                                   @RequestBody DepartamentoDTO dto) {
+        departamentoService.updateDepartamento(departamentoId, dto);
     }
+
 }

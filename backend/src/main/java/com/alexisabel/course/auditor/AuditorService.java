@@ -4,47 +4,47 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 @Service
 public class AuditorService {
 
-    private final AuditorRepository AuditorRepository;
+    private final AuditorRepository auditorRepository;
     @Autowired
     public AuditorService(AuditorRepository AuditorRepository) {
-        this.AuditorRepository = AuditorRepository;
+        this.auditorRepository = AuditorRepository;
     }
 
     public List<Auditor> getAuditors() {
-        return AuditorRepository.findAll();
+        return auditorRepository.findAll();
     }
 
-    public Optional<Auditor> getAuditor(Long AuditorId) {
-        return AuditorRepository.findById(AuditorId);
+    public Optional<Auditor> getAuditor(Long auditorId) {
+        return auditorRepository.findById(auditorId);
     }
 
-    public void addAuditor(Auditor Auditor) {
-        AuditorRepository.save(Auditor);
+    public void addAuditor(AuditorDTO dto) {
+        Auditor auditor = new Auditor(dto.getNombre(), dto.getEmail());
+        auditorRepository.save(auditor);
     }
 
-    public void deleteAuditor(Long AuditorId) {
-        boolean exists = AuditorRepository.existsById(AuditorId);
+    public void deleteAuditor(Long auditorId) {
+        boolean exists = auditorRepository.existsById(auditorId);
         if(!exists) {
-            throw new IllegalStateException("El Auditor con el id "+AuditorId+" does not exist");
+            throw new IllegalStateException("El Auditor con el id "+auditorId+" does not exist");
         }
-        AuditorRepository.deleteById(AuditorId);
+        auditorRepository.deleteById(auditorId);
     }
     @Transactional
-    public void updateAuditor(Long AuditorId, String nombre, String email) {
-        Auditor Auditor = AuditorRepository.findById(AuditorId).orElseThrow(() -> new IllegalStateException("El Auditor con id: "+AuditorId+" no existe."));
-        if(nombre != null && !nombre.isEmpty() && !Objects.equals(Auditor.getNombre(), nombre))
-        {
-            Auditor.setNombre(nombre);
+    public void updateAuditor(Long auditorId, AuditorDTO dto) {
+        Auditor auditor = auditorRepository.findById(auditorId)
+                .orElseThrow(() -> new IllegalStateException("No existe el auditor con id: " + auditorId));
+
+        if (dto.getNombre() != null && !dto.getNombre().isEmpty()) {
+            auditor.setNombre(dto.getNombre());
         }
-        if(email != null && !email.isEmpty() && !Objects.equals(Auditor.getEmail(), email))
-        {
-            Auditor.setEmail(email);
+        if (dto.getEmail() != null && !dto.getEmail().isEmpty()) {
+            auditor.setEmail(dto.getEmail());
         }
     }
 }

@@ -1,6 +1,7 @@
 package com.alexisabel.course.auditoria;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,7 +30,7 @@ public class AuditoriaController {
     }
 
     @PostMapping
-    public void addAuditoria(@RequestBody AuditoriaDTO auditoriaDTO) {
+    public void addAuditoria(@Validated @RequestBody AuditoriaDTO auditoriaDTO) {
         auditoriaService.addAuditoria(auditoriaDTO);
     }
 

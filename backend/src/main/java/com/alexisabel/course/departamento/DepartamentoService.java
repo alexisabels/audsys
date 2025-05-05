@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -24,8 +23,9 @@ public class DepartamentoService {
         return departamentoRepository.findById(departamentoId);
     }
 
-    public void addDepartamento(Departamento departamento) {
-      departamentoRepository.save(departamento);
+    public void addDepartamento(DepartamentoDTO dto) {
+        Departamento departamento = new Departamento(dto.getNombre(), dto.getResponsable());
+        departamentoRepository.save(departamento);
     }
 
     public void deleteDepartamento(Long departamentoId) {
@@ -36,15 +36,16 @@ public class DepartamentoService {
             departamentoRepository.deleteById(departamentoId);
     }
     @Transactional
-    public void updateDepartamento(Long departamentoId, String nombre, String responsable) {
-        Departamento departamento = departamentoRepository.findById(departamentoId).orElseThrow(() -> new IllegalStateException("El departamento con id: "+departamentoId+" no existe."));
-    if(nombre != null && !nombre.isEmpty() && !Objects.equals(departamento.getNombre(), nombre))
-    {
-        departamento.setNombre(nombre);
-    }
-        if(responsable != null && !responsable.isEmpty() && !Objects.equals(departamento.getResponsable(), responsable))
-        {
-            departamento.setResponsable(responsable);
+    public void updateDepartamento(Long id, DepartamentoDTO dto) {
+        Departamento departamento = departamentoRepository.findById(id)
+                .orElseThrow(() -> new IllegalStateException("El departamento con id: " + id + " no existe."));
+
+        if (dto.getNombre() != null && !dto.getNombre().isEmpty()) {
+            departamento.setNombre(dto.getNombre());
+        }
+        if (dto.getResponsable() != null && !dto.getResponsable().isEmpty()) {
+            departamento.setResponsable(dto.getResponsable());
         }
     }
+
 }
