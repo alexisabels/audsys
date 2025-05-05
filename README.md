@@ -1,5 +1,5 @@
 # AudSys
-
+### Gestión de auditorías para empresas
 AudSys es una aplicación pensada para ayudar a pequeñas empresas a tener controlados sus procesos de calidad. Permite organizar auditorías, registrar lo que se encuentra en ellas, asignar responsables y hacer seguimiento de las acciones que hay que tomar.
 
 ## Características
@@ -38,6 +38,47 @@ AudSys es una aplicación pensada para ayudar a pequeñas empresas a tener contr
 
 (Disponible también POST, PUT y DELETE para cada entidad).
 
+## Ejemplo de uso
+
+### Obtener auditorías registradas
+
+`GET /api/v1/auditoria`
+
+```json
+[
+  {
+    "id": 3,
+    "fecha": "2025-12-10",
+    "tipo": "INTERNA",
+    "categorias": ["CALIDAD", "SEGURIDAD"],
+    "departamento": {
+      "id": 1,
+      "nombre": "IT",
+      "responsable": "Alejandro Isabel"
+    },
+    "auditor": {
+      "id": 1,
+      "nombre": "Fulano Mengano",
+      "email": "fmengano@gmail.com"
+    },
+    "observaciones": [
+      {
+        "id": 1,
+        "descripcion": "Falta de documentación adecuada en el área de control de calidad",
+        "criticidad": "BAJA"
+      }
+    ],
+    "planesAccion": [
+      {
+        "id": 1,
+        "descripcion": "Actualizar los procedimientos internos y garantizar que toda la documentación esté correcta",
+        "estado": "PENDIENTE"
+      }
+    ]
+  }
+]
+```
+Puedes ver más endpoints [aquí](https://alexisabels.github.io/)
 ## Próximos pasos
 
 - [ ] Implementar frontend con React.
