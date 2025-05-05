@@ -1,10 +1,14 @@
 package com.alexisabel.course.auditoria;
 
-import com.alexisabel.course.auditor.Auditor;
 import com.alexisabel.course.departamento.Departamento;
+import com.alexisabel.course.auditor.Auditor;
+import com.alexisabel.course.observacion.Observacion;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -14,6 +18,7 @@ public class Auditoria {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private LocalDate fecha;
+
     @Enumerated(EnumType.STRING)
     private TipoAuditoria tipo;
 
@@ -29,7 +34,11 @@ public class Auditoria {
     @JoinColumn(name = "auditor_id")
     private Auditor auditor;
 
-    public Auditoria(){}
+    @OneToMany(mappedBy = "auditoria", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    private List<Observacion> observaciones;
+
+
 
     public Auditoria(LocalDate fecha, TipoAuditoria tipo, Set<CategoriaAuditoria> categorias, Departamento departamento, Auditor auditor) {
         this.fecha = fecha;
@@ -37,6 +46,20 @@ public class Auditoria {
         this.categorias = categorias;
         this.departamento = departamento;
         this.auditor = auditor;
+    }
+
+    // hago un constructor con y sin observaciones, por si se crea de una forma u otra
+    public Auditoria(LocalDate fecha, TipoAuditoria tipo, Set<CategoriaAuditoria> categorias, Departamento departamento, Auditor auditor, List<Observacion> observaciones) {
+        this.fecha = fecha;
+        this.tipo = tipo;
+        this.categorias = categorias;
+        this.departamento = departamento;
+        this.auditor = auditor;
+        this.observaciones = observaciones;
+    }
+
+    public Auditoria() {
+
     }
 
     public Long getId() {
@@ -87,15 +110,11 @@ public class Auditoria {
         this.auditor = auditor;
     }
 
-    @Override
-    public String toString() {
-        return "Auditoria{" +
-                "id=" + id +
-                ", fecha=" + fecha +
-                ", tipo=" + tipo +
-                ", categorias=" + categorias +
-                ", departamento=" + departamento +
-                ", auditor=" + auditor +
-                '}';
+    public List<Observacion> getObservaciones() {
+        return observaciones;
+    }
+
+    public void setObservaciones(List<Observacion> observaciones) {
+        this.observaciones = observaciones;
     }
 }

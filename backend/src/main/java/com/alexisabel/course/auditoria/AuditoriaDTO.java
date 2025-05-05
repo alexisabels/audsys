@@ -1,18 +1,24 @@
 package com.alexisabel.course.auditoria;
 
 
+import com.alexisabel.course.observacion.ObservacionDTO;
+
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Set;
 
 public class AuditoriaDTO {
-    public AuditoriaDTO(LocalDate fecha, TipoAuditoria tipo, Set<CategoriaAuditoria> categorias, Long auditorId, Long departamentoId) {
+    public AuditoriaDTO(LocalDate fecha, TipoAuditoria tipo, Set<CategoriaAuditoria> categorias, Long auditorId, Long departamentoId, List<ObservacionDTO> observaciones) {
         this.fecha = fecha;
         this.tipo = tipo;
         this.categorias = categorias;
         this.auditorId = auditorId;
         this.departamentoId = departamentoId;
+        this.observaciones = observaciones;
     }
-    public AuditoriaDTO() {}
+
+    public AuditoriaDTO() {
+    }
 
     private LocalDate fecha;
 
@@ -23,8 +29,8 @@ public class AuditoriaDTO {
     private Long auditorId;
 
     private Long departamentoId;
+    private List<ObservacionDTO> observaciones;
 
-    // Getters y Setters
 
     public LocalDate getFecha() {
         return fecha;
@@ -64,5 +70,13 @@ public class AuditoriaDTO {
 
     public void setDepartamentoId(Long departamentoId) {
         this.departamentoId = departamentoId;
+    }
+
+    public List<ObservacionDTO> getObservaciones() {
+        return observaciones;
+    }
+
+    public void setObservaciones(List<ObservacionDTO> observaciones) {
+        this.observaciones = observaciones;
     }
 }

@@ -1,6 +1,10 @@
 package com.alexisabel.course.auditor;
 
+import com.alexisabel.course.auditoria.Auditoria;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 @Table
@@ -10,6 +14,9 @@ public class Auditor {
     private Long id;
     private String nombre;
     private String email;
+    @OneToMany(mappedBy = "auditor")
+    @JsonIgnore
+    private List<Auditoria> auditorias;
 
     public Auditor() {
     }
@@ -17,6 +24,14 @@ public class Auditor {
     public Auditor(String nombre, String email) {
         this.nombre = nombre;
         this.email = email;
+    }
+
+    public List<Auditoria> getAuditorias() {
+        return auditorias;
+    }
+
+    public void setAuditorias(List<Auditoria> auditorias) {
+        this.auditorias = auditorias;
     }
 
     public Long getId() {
