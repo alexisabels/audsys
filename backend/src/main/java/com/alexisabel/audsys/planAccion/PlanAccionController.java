@@ -1,5 +1,6 @@
 package com.alexisabel.audsys.planAccion;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
@@ -8,6 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @CrossOrigin(origins = "*")
+@Tag(name = "Planes de Acción", description = "Planes definidos para corregir o mejorar aspectos detectados en las auditorías.")
 @RestController
 @RequestMapping(path = "/api/v1/planAccion")
 public class PlanAccionController {

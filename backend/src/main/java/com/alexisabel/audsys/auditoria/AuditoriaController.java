@@ -1,5 +1,6 @@
 package com.alexisabel.audsys.auditoria;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -8,6 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @CrossOrigin(origins = "*")
+@Tag(name = "Auditorías", description = "Operaciones relacionadas con las auditorías realizadas en los distintos departamentos.")
 @RestController
 @RequestMapping(path = "/api/v1/auditoria")
 public class AuditoriaController {

@@ -1,5 +1,6 @@
 package com.alexisabel.audsys.departamento;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import jakarta.validation.Valid;
@@ -7,6 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 @CrossOrigin(origins = "*")
+@Tag(name = "Departamentos", description = "Gestión de departamentos auditables y sus responsables.")
 @RestController
 @RequestMapping(path = "/api/v1/departamento")
 public class DepartamentoController {
