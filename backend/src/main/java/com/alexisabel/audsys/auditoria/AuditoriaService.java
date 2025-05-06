@@ -6,6 +6,8 @@ import com.alexisabel.audsys.departamento.Departamento;
 import com.alexisabel.audsys.departamento.DepartamentoRepository;
 import com.alexisabel.audsys.observacion.Observacion;
 import com.alexisabel.audsys.observacion.ObservacionDTO;
+import com.alexisabel.audsys.planAccion.PlanAccion;
+import com.alexisabel.audsys.planAccion.PlanAccionDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -48,6 +50,7 @@ public class AuditoriaService {
 
         Auditoria auditoria = new Auditoria(dto.getFecha(), dto.getTipo(), dto.getCategorias(), departamento, auditor);
 
+        // observaciones
         if (dto.getObservaciones() != null && !dto.getObservaciones().isEmpty()) {
             List<Observacion> observaciones = new ArrayList<>();
             for (ObservacionDTO observacionDTO : dto.getObservaciones()) {
@@ -55,11 +58,21 @@ public class AuditoriaService {
                 observaciones.add(observacion);
             }
             auditoria.setObservaciones(observaciones);
+        }
 
+        // planes de acción
+        if (dto.getPlanesAccion() != null && !dto.getPlanesAccion().isEmpty()) {
+            List<PlanAccion> planes = new ArrayList<>();
+            for (PlanAccionDTO planDTO : dto.getPlanesAccion()) {
+                PlanAccion plan = new PlanAccion(planDTO.getDescripcion(), planDTO.getEstado(), auditoria);
+                planes.add(plan);
+            }
+            auditoria.setPlanesAccion(planes);
         }
 
         auditoriaRepository.save(auditoria);
     }
+
 
     public void deleteAuditoria(Long auditoriaId) {
         boolean exists = auditoriaRepository.existsById(auditoriaId);

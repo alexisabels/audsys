@@ -116,6 +116,14 @@ public class Auditoria {
         this.departamento = departamento;
     }
 
+    public List<PlanAccion> getPlanesAccion() {
+        return planesAccion;
+    }
+
+    public void setPlanesAccion(List<PlanAccion> planesAccion) {
+        this.planesAccion = planesAccion;
+    }
+
     public Auditor getAuditor() {
         return auditor;
     }

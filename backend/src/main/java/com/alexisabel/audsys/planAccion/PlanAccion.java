@@ -56,7 +56,9 @@ public class PlanAccion {
     public Auditoria getAuditoria() {
         return auditoria;
     }
-
+    public Long getAuditoriaId() {
+        return auditoria != null ? auditoria.getId() : null;
+    }
     public void setAuditoria(Auditoria auditoria) {
         this.auditoria = auditoria;
     }

@@ -33,12 +33,14 @@ public class PlanAccionService {
     }
 
     public void addPlanAccion(PlanAccionDTO dto) {
-        Auditoria auditoria = auditoriaRepository.findById(dto.getAuditoriaId()).orElseThrow(() -> new IllegalStateException("Auditoría con ID " + dto.getAuditoriaId() + " no encontrada"));
+        Auditoria auditoria = auditoriaRepository.findById(dto.getAuditoriaId())
+                .orElseThrow(() -> new IllegalStateException("Auditoría con ID " + dto.getAuditoriaId() + " no encontrada"));
 
         PlanAccion plan = new PlanAccion(dto.getDescripcion(), dto.getEstado(), auditoria);
 
         planAccionRepository.save(plan);
     }
+
 
     public void deletePlan(Long planId) {
         boolean exists = planAccionRepository.existsById(planId);
